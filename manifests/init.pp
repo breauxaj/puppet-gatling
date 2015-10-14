@@ -6,14 +6,14 @@ class gatling (
     path    => '/bin:/usr/bin',
     command => "wget ${source}/${version}/gatling-charts-highcharts-bundle-${version}-bundle.zip",
     cwd     => '/tmp',
-    creates => "/tmp/gatling-charts-highcharts-bundle-${version}-bundle.tgz",
+    creates => "/tmp/gatling-charts-highcharts-bundle-${version}-bundle.zip",
     timeout => 10000,
     onlyif  => "test ! -d /usr/local/gatling-charts-highcharts-bundle-${version}",
   }
 
   exec { 'unzip-gatling':
     path    => '/bin:/usr/bin',
-    command => "tar -zxf /tmp/gatling-charts-highcharts-bundle-${version}-bundle.tgz",
+    command => "unzip -q /tmp/gatling-charts-highcharts-bundle-${version}-bundle.zip",
     cwd     => '/usr/local',
     creates => "/usr/local/gatling-charts-highcharts-bundle-${version}",
     timeout => 10000,
